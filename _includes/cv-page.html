@@ -1,0 +1,287 @@
+{%- comment -%}
+  The whole page, for one language. index.html (English) and it/index.html
+  (Italian) both include this; page.lang picks the content and the fixed words.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign ui = site.data.ui[lang] -%}
+{%- if lang == "it" -%}
+  {%- assign cv = site.data.cv_it -%}{%- assign base = "/it" -%}{%- assign other = "/" -%}
+{%- else -%}
+  {%- assign cv = site.data.cv -%}{%- assign base = "" -%}{%- assign other = "/it/" -%}
+{%- endif -%}
+{%- assign b = cv.basics -%}
+
+<div class="page">
+  <header class="head">
+    {% include contours.svg %}
+    {% if b.photo %}<img class="photo" src="{{ b.photo | relative_url }}" alt="{{ b.name }}">{% endif %}
+    <div class="head-text">
+      {% if b.coordinates %}<p class="coords">{{ b.coordinates }}</p>{% endif %}
+      <h1>{{ b.name }}</h1>
+      {% if b.label %}<p class="label">{{ b.label }}</p>{% endif %}
+      <ul class="contact">
+        {% if b.location %}<li>{% include icon-pin.svg %}{{ b.location }}</li>{% endif %}
+        {%- comment %} The address is only assembled in the browser, so harvesters reading the HTML do not get it. {% endcomment %}
+        {% if b.email %}{% assign mail = b.email | split: "@" %}<li>{% include icon-mail.svg %}<a class="email" href="#" data-u="{{ mail[0] }}" data-d="{{ mail[1] }}">{{ mail[0] }} [at] {{ mail[1] }}</a></li>{% endif %}
+        {% if b.phone %}<li>{% include icon-phone.svg %}<a href="tel:{{ b.phone | remove: ' ' }}">{{ b.phone }}</a></li>{% endif %}
+        {% if b.website %}<li>{% include icon-link.svg %}<a href="{{ b.website }}">{{ b.website | remove: 'https://' | remove: 'http://' }}</a></li>{% endif %}
+        {% for l in b.links %}<li>{% include icon-link.svg %}<a href="{{ l.url }}">{{ l.label }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <nav class="toolbar" aria-label="{{ ui.download }}">
+      <a href="{{ base | append: '/cv.pdf' | relative_url }}" download>{{ ui.download_pdf }}</a>
+      <a href="{{ base | append: '/cv.md' | relative_url }}" download>Markdown</a>
+      <button type="button" onclick="window.print()">{{ ui.print }}</button>
+      <a href="{{ other | relative_url }}" lang="{% if lang == 'it' %}en{% else %}it{% endif %}">{{ ui.other_lang }}</a>
+      <button type="button" id="theme" title="{{ ui.theme_title }}" data-labels='{{ ui.themes | jsonify }}'>{% include icon-theme.svg %}<span>{{ ui.themes.light }}</span></button>
+      <button type="button" id="design" title="{{ ui.design_title }}">{{ ui.design }}: <span>Atlas</span></button>
+    </nav>
+  </header>
+
+  <nav class="secnav" aria-label="{{ ui.sections }}">
+    {% assign secs = "experience,work,education,talks,publications,projects,places,skills,languages,certifications" | split: "," %}
+    {%- for k in secs %}{% if cv[k] and cv[k].size > 0 %}
+    <a class="sec-{{ k }}" href="#{{ k }}">{% include icon-{{ k }}.svg %}{{ ui[k] }}</a>
+    {%- endif %}{% endfor %}
+  </nav>
+
+  <div class="layout">
+    <main class="main">
+      {% if b.summary %}
+      <section class="summary">{{ b.summary | markdownify }}</section>
+      {% endif %}
+
+      {% if cv.experience and cv.experience.size > 0 %}
+      <section id="experience" class="timeline sec-experience">
+        <h2>{% include icon-experience.svg %}{{ ui.experience }}</h2>
+        {% for e in cv.experience %}
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{{ e.role }}</h3>
+            <p class="when">{{ e.start }}{% if e.end %} – {{ e.end }}{% endif %}</p>
+          </div>
+          {% if e.org or e.location %}
+          <p class="where">
+            {%- if e.org %}<span class="org">{{ e.org | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>{% endif -%}
+            {%- if e.org and e.location %} · {% endif -%}
+            {{- e.location -}}
+          </p>
+          {% endif %}
+          {% if e.summary %}<div class="entry-summary">{{ e.summary | markdownify }}</div>{% endif %}
+          {% if e.highlights and e.highlights.size > 0 %}
+          <ul class="highlights">
+            {% for h in e.highlights %}<li>{{ h | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.work and cv.work.size > 0 %}
+      <section id="work" class="sec-work">
+        <h2>{% include icon-work.svg %}{{ ui.work }}</h2>
+        <div class="cards">
+          {% for w in cv.work %}
+          <article class="card">
+            <h3>{% if w.url %}<a href="{{ w.url }}">{{ w.name }}</a>{% else %}{{ w.name }}{% endif %}</h3>
+            {% if w.description %}{{ w.description | markdownify }}{% endif %}
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if cv.education and cv.education.size > 0 %}
+      <section id="education" class="timeline sec-education">
+        <h2>{% include icon-education.svg %}{{ ui.education }}</h2>
+        {% for e in cv.education %}
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{{ e.degree }}</h3>
+            <p class="when">{{ e.start }}{% if e.end %} – {{ e.end }}{% endif %}</p>
+          </div>
+          {% if e.institution or e.location %}
+          <p class="where">
+            {%- if e.institution %}<span class="org">{{ e.institution }}</span>{% endif -%}
+            {%- if e.institution and e.location %} · {% endif -%}
+            {{- e.location -}}
+          </p>
+          {% endif %}
+          {% if e.details %}<div class="entry-summary">{{ e.details | markdownify }}</div>{% endif %}
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.talks and cv.talks.size > 0 %}
+      <section id="talks" class="sec-talks">
+        <h2>{% include icon-talks.svg %}{{ ui.talks }}</h2>
+        <ul class="plain">
+          {% for t in cv.talks %}<li>{{ t | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if cv.publications and cv.publications.size > 0 %}
+      <section id="publications" class="sec-publications">
+        <h2>{% include icon-publications.svg %}{{ ui.publications }}</h2>
+        <ul class="plain">
+          {% for p in cv.publications %}<li>{{ p | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if cv.projects and cv.projects.size > 0 %}
+      <section id="projects" class="sec-projects">
+        <h2>{% include icon-projects.svg %}{{ ui.projects }}</h2>
+        <ul class="plain">
+          {% for p in cv.projects %}
+          <li><strong>{% if p.url %}<a href="{{ p.url }}">{{ p.name }}</a>{% else %}{{ p.name }}{% endif %}</strong>
+            {%- if p.description %} — {{ p.description | markdownify | remove: '<p>' | remove: '</p>' | strip }}{% endif %}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </main>
+
+    <aside class="side">
+      {% if cv.places and cv.places.size > 0 %}
+      <section id="places" class="sec-places">
+        <h2>{% include icon-places.svg %}{{ ui.places }}</h2>
+        {%- comment %}
+          Equirectangular, 26°W–25°E, 35°N–67.5°N: x = (lon + 26) × 6.16, y = (67.5 − lat) × 10.
+          The coastline in map-land.svg uses the same maths.
+        {% endcomment %}
+        <svg class="map" viewBox="0 0 314 325" role="img" aria-label="{{ ui.map_label }}">
+          {% include map-land.svg %}
+          <path class="graticule" d="M37 0V325M98.6 0V325M160.2 0V325M221.8 0V325M283.4 0V325M0 75H314M0 175H314M0 275H314"/>
+          <g class="ticks"><text x="3" y="71">60° N</text><text x="3" y="171">50° N</text><text x="3" y="271">40° N</text><text x="163" y="320">0°</text><text x="101" y="320">10° W</text></g>
+          {%- comment %} The route: one curved leg per step, bulging differently so repeated legs stay apart. {% endcomment %}
+          {% if cv.route and cv.route.size > 1 %}
+          <defs><marker id="arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path class="arrowhead" d="M0 0L6 3L0 6z"/></marker></defs>
+          <g class="route">
+            {% for n in cv.route %}
+            {%- assign stop = cv.places | where: "name", n | first -%}
+            {%- assign x2 = stop.lon | plus: 26 | times: 6.16 | round: 1 -%}
+            {%- assign y2 = 67.5 | minus: stop.lat | times: 10 | round: 1 -%}
+            {%- unless forloop.first -%}
+              {%- assign k = forloop.index0 | modulo: 4 | times: 0.07 | plus: 0.08 -%}
+              {%- assign ox = y2 | minus: y1 | times: k -%}
+              {%- assign oy = x2 | minus: x1 | times: k -%}
+              {%- assign cx = x1 | plus: x2 | divided_by: 2.0 | minus: ox | round: 1 -%}
+              {%- assign cy = y1 | plus: y2 | divided_by: 2.0 | plus: oy | round: 1 %}
+            <path d="M{{ x1 }} {{ y1 }}Q{{ cx }} {{ cy }} {{ x2 }} {{ y2 }}" marker-end="url(#arrow)"/>
+            {%- endunless -%}
+            {%- assign x1 = x2 -%}{%- assign y1 = y2 -%}
+            {% endfor %}
+          </g>
+          {% endif %}
+          {% assign far = 0 %}
+          {% for p in cv.places %}
+          {%- if p.lon < -26 or p.lon > 25 or p.lat < 35 or p.lat > 67.5 %}{% assign far = far | plus: 1 %}{% continue %}{% endif -%}
+          {%- assign x = p.lon | plus: 26 | times: 6.16 | round: 1 -%}
+          {%- assign y = 67.5 | minus: p.lat | times: 10 | round: 1 -%}
+          {%- assign anchor = p.anchor | default: "start" -%}
+          {%- if anchor == "end" %}{% assign dx = p.dx | default: -9 %}{% else %}{% assign dx = p.dx | default: 9 %}{% endif -%}
+          {%- assign dy = p.dy | default: 4 %}
+          <g transform="translate({{ x }} {{ y }})">
+            <rect class="dot{% if p.kind == 'mapped' %} mapped{% endif %}" x="-4" y="-4" width="8" height="8" transform="rotate(45)"/>
+            <text x="{{ dx }}" y="{{ dy }}" text-anchor="{{ anchor }}">{{ p.name }}</text>
+          </g>
+          {% endfor %}
+        </svg>
+        {%- comment %} Places outside Europe go on a small world map: x = (lon + 180) × 0.8722, y = (80 − lat) × 0.8722. {% endcomment %}
+        {% if far > 0 %}
+        <svg class="map world" viewBox="0 0 314 120" role="img" aria-label="{{ ui.world_label }}">
+          {% include map-world.svg %}
+          <rect class="extent" x="134.3" y="10.9" width="44.5" height="28.3"/>
+          {% for p in cv.places %}
+          {%- unless p.lon < -26 or p.lon > 25 or p.lat < 35 or p.lat > 67.5 %}{% continue %}{% endunless -%}
+          {%- assign x = p.lon | plus: 180 | times: 0.8722 | round: 1 -%}
+          {%- assign y = 80 | minus: p.lat | times: 0.8722 | round: 1 -%}
+          {%- assign anchor = p.anchor | default: "start" -%}
+          {%- if anchor == "end" %}{% assign dx = p.dx | default: -9 %}{% else %}{% assign dx = p.dx | default: 9 %}{% endif -%}
+          {%- assign dy = p.dy | default: 4 %}
+          <g transform="translate({{ x }} {{ y }})">
+            <rect class="dot{% if p.kind == 'mapped' %} mapped{% endif %}" x="-4" y="-4" width="8" height="8" transform="rotate(45)"/>
+            <text x="{{ dx }}" y="{{ dy }}" text-anchor="{{ anchor }}">{{ p.name }}</text>
+          </g>
+          {% endfor %}
+        </svg>
+        {% endif %}
+        <p class="legend">
+          <span><svg viewBox="-6 -6 12 12" aria-hidden="true"><rect class="dot" x="-4" y="-4" width="8" height="8" transform="rotate(45)"/></svg>{{ ui.lived }}</span>
+          {% assign mapped = cv.places | where: "kind", "mapped" %}{% if mapped.size > 0 %}<span><svg viewBox="-6 -6 12 12" aria-hidden="true"><rect class="dot mapped" x="-4" y="-4" width="8" height="8" transform="rotate(45)"/></svg>{{ ui.mapped }}</span>{% endif %}
+          {% if cv.route %}<span><svg viewBox="0 0 22 12" class="wide" aria-hidden="true"><path class="route-key" d="M1 9Q11 -2 21 9"/></svg>{{ ui.route }}</span>{% endif %}
+        </p>
+        <dl class="placelist">
+          {% for p in cv.places %}{% if p.note %}<dt>{{ p.name }}</dt><dd>{{ p.note }}</dd>{% endif %}{% endfor %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if cv.skills and cv.skills.size > 0 %}
+      <section id="skills" class="sec-skills">
+        <h2>{% include icon-skills.svg %}{{ ui.skills }}</h2>
+        {% for s in cv.skills %}
+        <div class="skillgroup">
+          <h3>{{ s.group }}</h3>
+          <ul class="chips">{% for i in s.items %}<li>{{ i }}</li>{% endfor %}</ul>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.languages and cv.languages.size > 0 %}
+      <section id="languages" class="sec-languages">
+        <h2>{% include icon-languages.svg %}{{ ui.languages }}</h2>
+        <dl class="langs">
+          {% for l in cv.languages %}<dt>{{ l.name }}</dt>
+          <dd>{{ l.level }}
+            {%- if l.score %}<span class="meter" aria-hidden="true">{% for i in (1..6) %}<i{% if i <= l.score %} class="on"{% endif %}></i>{% endfor %}</span>{% endif -%}
+          </dd>{% endfor %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if cv.certifications and cv.certifications.size > 0 %}
+      <section id="certifications" class="sec-certifications">
+        <h2>{% include icon-certifications.svg %}{{ ui.certifications }}</h2>
+        <ul class="plain small">
+          {% for c in cv.certifications %}<li>{{ c | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </aside>
+  </div>
+
+  <footer class="foot">{{ ui.updated }} {{ site.time | date: ui.date_format }}</footer>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    document.querySelectorAll("a.email").forEach(function (a) {
+      var address = a.dataset.u + "@" + a.dataset.d;
+      a.href = "mailto:" + address;
+      a.textContent = address;
+    });
+
+    function cycle(id, key, order, fallback, labels) {
+      var btn = document.getElementById(id), text = btn.querySelector("span");
+      function show(v) { text.textContent = labels ? labels[v] : v.charAt(0).toUpperCase() + v.slice(1); }
+      show(root.dataset[key] || fallback);
+      btn.addEventListener("click", function () {
+        var v = order[(order.indexOf(root.dataset[key]) + 1) % order.length];
+        root.dataset[key] = v;
+        show(v);
+        try { localStorage.setItem(key, v); } catch (e) {}
+      });
+    }
+    // Each button shows the current choice; a click moves to the next one.
+    cycle("theme", "theme", ["light", "dark", "black"], "light", JSON.parse(document.getElementById("theme").dataset.labels));
+    cycle("design", "design", ["atlas", "editorial", "bento", "sidebar"], "atlas");
+  })();
+</script>

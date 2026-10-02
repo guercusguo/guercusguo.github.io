@@ -1,0 +1,12 @@
+title: Guido Antonio Di Carlo — CV
+description: Curriculum vitae of Guido Antonio Di Carlo, geospatial software engineer and GIS expert
+url: "https://guercusguo.github.io"
+baseurl: ""
+
+markdown: kramdown
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .github

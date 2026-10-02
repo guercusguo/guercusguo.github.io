@@ -1,0 +1,165 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Il CV in italiano — stessa struttura di cv.yml, pubblicato su /it/.
+# Quando cambi qualcosa in cv.yml, ricordati di cambiarlo anche qui.
+# ─────────────────────────────────────────────────────────────────────────────
+
+basics:
+  name: Guido Antonio Di Carlo
+  label: Geografo e ingegnere del software geospaziale
+  location: Torino, Italia
+  coordinates: "45.07° N · 7.69° E"
+  links:
+    - { label: LinkedIn, url: "https://www.linkedin.com/in/guido-antonio-di-carlo/" }
+  summary: >-
+    Geografo e ingegnere del software geospaziale. Sono arrivato alle mappe
+    dalla biologia e dalle questioni ambientali, e continuo a leggere i luoghi
+    attraverso le persone e il territorio quanto attraverso i dati: accanto al
+    lavoro sto conseguendo una seconda laurea magistrale, in Sociologia. Al
+    Joint Research Centre della Commissione Europea costruisco e gestisco le
+    piattaforme del Copernicus Emergency Management Service, che fornisce mappe
+    e geodati alle autorità di protezione civile prima e dopo i disastri. Ho
+    vissuto e lavorato in Islanda, Francia, Svizzera, Regno Unito e Italia.
+
+experience:
+  - role: Sviluppatore full-stack geospaziale e ingegnere di piattaforme cloud/GIS
+    org: Commissione Europea, Joint Research Centre (consulente esterno)
+    location: Torino, Italia
+    start: gen 2023
+    end: oggi
+    summary: >-
+      Progetto, sviluppo e gestisco le applicazioni web, le API e
+      l'infrastruttura cloud del servizio Risk and Recovery Mapping del
+      [Copernicus Emergency Management Service](https://mapping.emergency.copernicus.eu/)
+      (CEMS).
+    highlights:
+      - "**Applicazioni:** la piattaforma operativa per le attivazioni e il portale pubblico."
+      - "**API:** la CEMS Geo Services API, basata su standard geospaziali aperti."
+      - "**Cloud:** l'ambiente AWS e le sue pipeline CI/CD, compresi sicurezza e controllo degli accessi."
+      - "**Coordinamento:** referente tecnico per i fornitori che gestiscono la piattaforma GIS enterprise."
+
+  - role: Esperto di sistemi informativi geografici
+    org: Commissione Europea, Joint Research Centre (consulente esterno)
+    location: Ispra, Italia
+    start: ago 2022
+    end: oggi
+    summary: >-
+      Gestisco le attivazioni del CEMS Risk and Recovery Mapping e della sua
+      componente aerea, che acquisisce immagini e dati LiDAR da aerei e droni.
+    highlights:
+      - "**Attivazioni:** dalla richiesta alla consegna, definendo i requisiti con le autorità di protezione civile che le richiedono."
+      - "**Controllo qualità:** di mappe, geodati, rapporti, immagini aeree e LiDAR rispetto alle specifiche CEMS."
+      - "**Gare:** redazione dei documenti dei contratti quadro e delle specifiche tecniche, e valutazione delle offerte dei fornitori."
+
+  - role: Analista GIS e sviluppatore web mapping
+    org: "[ITHACA](https://ithaca.earth/)"
+    location: Torino, Italia
+    start: gen 2019
+    end: giu 2022
+    summary: >-
+      Centro di ricerca in geomatica e telerilevamento per la gestione delle
+      emergenze, e fornitore di servizi CEMS.
+    highlights:
+      - "**Cartografia d'emergenza:** cartografia e geodati per CEMS Rapid Mapping e Risk and Recovery Mapping, da immagini ottiche e SAR."
+      - "**Piattaforme web:** sviluppatore principale delle piattaforme di web mapping e degli strumenti interni di ITHACA."
+      - "**Studio per l'Agenzia Europea dell'Ambiente:** responsabile tecnico di un audit dei geodati nazionali dei 27 Stati membri, della loro accessibilità e della conformità a INSPIRE e Open Data."
+
+  - role: Specialista GIS reperibile, osservazione della Terra
+    org: "[ITHACA](https://ithaca.earth/)"
+    location: Torino, Italia
+    start: giu 2017
+    end: dic 2018
+    summary: >-
+      Produzione in reperibilità per CEMS Rapid Mapping, il servizio dell'UE
+      attivo 24 ore su 24: mappatura di alluvioni, incendi e danni da immagini
+      satellitari entro poche ore da un disastro.
+
+work:
+  - name: Portale cartografico del Copernicus EMS
+    url: https://mapping.emergency.copernicus.eu/
+    description: Il sito pubblico in cui vengono pubblicati ogni attivazione, mappa e dataset. Mi occupo dell'acquisizione dei dati, dei template e della ricerca.
+  - name: CEMS Geo Services API
+    description: Un'API basata su standard che permette ad altri sistemi di interrogare e scaricare i geodati del servizio. L'ho progettata e sviluppata.
+  - name: Audit dei geodati dell'UE27
+    description: Uno studio per l'Agenzia Europea dell'Ambiente su quanto siano davvero accessibili i geodati ufficiali di ciascuno Stato membro. Ho guidato la parte tecnica.
+
+education:
+  - degree: Laurea magistrale in Sociologia
+    institution: Università di Torino
+    location: Torino, Italia
+    start: "2025"
+    end: oggi
+    details: >-
+      Le società contemporanee e le loro trasformazioni, con una formazione
+      teorica e metodologica, qualitativa e quantitativa.
+  - degree: Laurea magistrale in Geografia e Scienze Territoriali
+    institution: Università di Torino
+    location: Torino, Italia
+    start: "2016"
+    end: "2021"
+    details: >-
+      Geografia fisica e geoinformatica, 109/110. Tesi su come rendere più
+      accessibili su Moodle i materiali di un corso di telerilevamento, con una
+      pipeline NLP in Python per l'assegnazione automatica di parole chiave.
+  - degree: Laurea in Biologia Ambientale
+    institution: Università del Piemonte Orientale
+    location: Alessandria, Italia
+    start: "2004"
+    end: "2008"
+
+places:
+  - { name: Reykjavík,   lon: -21.90, lat: 64.15, note: "HI Iceland, 2012–13 e 2015–16" }
+  - { name: Aberdeen,    lon: -2.10, lat: 57.15, note: "Erasmus, 2005–06" }
+  - { name: Lione,       lon: 4.83,  lat: 45.76, note: "studi sullo sviluppo locale, 2014", anchor: end, dy: -3 }
+  - { name: Bellinzona,  lon: 9.02,  lat: 46.19, note: "2013–14", dy: -9 }
+  - { name: Ispra,       lon: 8.61,  lat: 45.81, note: "Joint Research Centre" }
+  - { name: Torino,      lon: 7.69,  lat: 45.07, note: "casa, laurea magistrale, ITHACA", anchor: end, dy: 13 }
+  - { name: Alessandria, lon: 8.61,  lat: 44.91, note: "laurea triennale", dy: 17 }
+  - { name: Madagascar,  lon: 47.0,  lat: -19.5, kind: mapped, note: "cambiamenti di copertura del suolo in aree protette, validati da immagini", anchor: end }
+
+# Ordine degli spostamenti, disegnato come frecce sulla mappa.
+route: [Alessandria, Aberdeen, Alessandria, Torino, Reykjavík, Bellinzona, Lione, Torino, Reykjavík, Torino, Ispra]
+
+skills:
+  - group: Linguaggi
+    items: [Python, SQL, JavaScript, HTML/CSS]
+  - group: Back-end
+    items: [Django, Django REST Framework, FastAPI, Wagtail, Celery, PostgreSQL/PostGIS, Redis, OAuth 2.0]
+  - group: Geospaziale
+    items: [OGC API, GDAL, GeoPandas, QGIS, ArcGIS Enterprise / Pro, ArcGIS API for Python, ENVI, SNAP]
+  - group: Web mapping
+    items: [OpenLayers, MapLibre / Mapbox GL JS, Leaflet, ArcGIS JS API, deck.gl, Cesium]
+  - group: Cloud e DevOps
+    items: [AWS, EKS, S3, RDS, CloudFront, IAM, CloudFormation, Terraform, Docker, Kubernetes/Helm, GitLab CI/CD]
+  - group: IA
+    items: [Sviluppo assistito da IA, API di LLM, NLP (base)]
+  - group: Grafica
+    items: [Affinity Designer, Inkscape, GIMP]
+
+languages:
+  - { name: Italiano,  level: Madrelingua }
+  - { name: Inglese,   level: Avanzato (C2) }
+  - { name: Islandese, level: Base (A1–A2) }
+
+talks:
+  - "**EU Science for Preparedness** — relatore principale e moderatore di gruppo. Torino, 2025"
+  - "**CEMS Annual Conference** — relatore principale. Ispra, 2023 e 2024"
+  - "**Workshop CEMS On-Demand Mapping** (incendi, alluvioni, terremoti) — relatore principale. Ispra, 2023"
+  - "**Emerging Technologies in DRR** — relatore principale. Ispra, 2023"
+
+publications:
+  - "_The 2023 CEMS On-Demand Mapping Workshops_: [Fire](https://dx.doi.org/10.2760/565217), [Flood](https://dx.doi.org/10.2760/060686), [Earthquake](https://publications.jrc.ec.europa.eu/repository/handle/JRC137940). Ufficio delle pubblicazioni dell'Unione Europea, 2023–2024."
+  - "[Remote Sensing Course in Geography Online Education: A MOODLE Learning Materials Adaptation and Optimization Workflow](https://doi.org/10.1007/978-3-031-17439-1_9). ASITA 2022, Genova."
+
+projects:
+  - name: OsmTO
+    description: membro del gruppo dei mappatori OpenStreetMap di Torino dal 2022.
+  - name: Notte della Geografia, Università di Torino
+    description: laboratorio di mappatura collaborativa, 2017–2018.
+  - name: Festival e conferenze
+    description: organizzatore di Couchfest (Torino, 2013) e, per HI Iceland, di Green Days e Beneath The Waves (Reykjavík, 2011–2012).
+
+certifications:
+  - "[LLMs Mastery: Transformers & Generative AI](https://www.udemy.com/certificate/UC-ddd4fddd-fa00-4c66-aca8-086466023edd/) — Udemy, 2025"
+  - "[AWS Solutions Architect Associate](https://www.udemy.com/certificate/UC-12d180cd-691b-4aa8-8914-51ae07b1b487/) (corso) — Udemy, 2025"
+  - "[FastAPI – The Complete Course](https://www.udemy.com/certificate/UC-fe1ae9fa-fa20-4f57-8055-1b3a20970f48/) — Udemy, 2024"
+  - "[Web Application Technologies and Django](https://www.coursera.org/account/accomplishments/certificate/W42TM5XKCCNJ) — University of Michigan, 2021"

@@ -1,0 +1,68 @@
+<!doctype html>
+{%- assign lang = page.lang | default: "en" -%}
+{%- if lang == "it" %}{% assign cv = site.data.cv_it %}{% else %}{% assign cv = site.data.cv %}{% endif -%}
+{%- assign b = cv.basics -%}
+{%- assign summary = b.summary | markdownify | strip_html | normalize_whitespace -%}
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ b.name }} — {{ b.label }}</title>
+  <meta name="description" content="{{ summary | truncate: 160 | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="alternate" hreflang="en" href="{{ '/' | absolute_url }}">
+  <link rel="alternate" hreflang="it" href="{{ '/it/' | absolute_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/img/favicon.svg' | relative_url }}">
+
+  <!-- what LinkedIn, WhatsApp, Slack… show when the link is pasted -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="{{ b.name | escape }}">
+  <meta property="og:description" content="{{ b.label | escape }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ '/assets/img/og.png' | absolute_url }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="{% if lang == 'it' %}it_IT{% else %}en_GB{% endif %}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- the same facts, for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": {{ b.name | jsonify }},
+    "jobTitle": {{ b.label | jsonify }},
+    "description": {{ summary | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "image": {{ '/assets/img/og.png' | absolute_url | jsonify }},
+    "address": { "@type": "PostalAddress", "addressLocality": {{ b.location | jsonify }} },
+    "sameAs": {{ b.links | map: "url" | jsonify }},
+    "knowsLanguage": {{ cv.languages | map: "name" | jsonify }}
+    {%- if cv.experience[0].org %},
+    "worksFor": { "@type": "Organization", "name": {{ cv.experience[0].org | markdownify | strip_html | strip | jsonify }} }
+    {%- endif %}
+    {%- if cv.education and cv.education.size > 0 %},
+    "alumniOf": {{ cv.education | map: "institution" | jsonify }}
+    {%- endif %}
+  }
+  </script>
+
+  <script>
+    (function () {
+      var root = document.documentElement, query = new URLSearchParams(location.search);
+      function pick(key, allowed, fallback) {
+        var v = query.get(key);
+        if (allowed.indexOf(v) < 0) { try { v = localStorage.getItem(key); } catch (e) {} }
+        root.dataset[key] = allowed.indexOf(v) < 0 ? fallback : v;
+      }
+      pick("theme", ["light", "dark", "black"], window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      pick("design", ["atlas", "editorial", "bento", "sidebar"], "atlas");
+    })();
+  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/cv.css' | relative_url }}">
+  <link rel="alternate" type="text/markdown" href="{% if lang == 'it' %}{{ '/it/cv.md' | relative_url }}{% else %}{{ '/cv.md' | relative_url }}{% endif %}">
+</head>
+<body>
+  {{ content }}
+</body>
+</html>

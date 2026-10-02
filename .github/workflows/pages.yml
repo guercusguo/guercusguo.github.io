@@ -1,0 +1,67 @@
+# Build the site, render the PDF from it, publish both to GitHub Pages.
+# Runs on every push to main — i.e. every time cv.yml is edited on github.com.
+name: Build and publish
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      # The PDF is the print stylesheet, rendered by the Chrome preinstalled on
+      # the runner — so the PDF, the page and "Print" in a browser all match.
+      - name: Render cv.pdf (English and Italian)
+        run: |
+          # Serve _site under the same base path it was built for ("" for a
+          # <user>.github.io repo, "/repo" for a project repo).
+          BASE="${{ steps.pages.outputs.base_path }}"
+          mkdir -p "/tmp/serve$BASE" && cp -r _site/. "/tmp/serve$BASE/"
+          python3 -m http.server 8000 --directory /tmp/serve >/dev/null 2>&1 &
+          sleep 1
+          for LANG_PATH in "" "/it"; do
+            google-chrome --headless=new --disable-gpu --no-sandbox \
+              --no-pdf-header-footer --virtual-time-budget=5000 \
+              --print-to-pdf="_site$LANG_PATH/cv.pdf" \
+              "http://localhost:8000$BASE$LANG_PATH/"
+            test -s "_site$LANG_PATH/cv.pdf"
+            ls -l "_site$LANG_PATH/cv.pdf"
+          done
+
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

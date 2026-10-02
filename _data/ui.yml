@@ -1,0 +1,58 @@
+# Fixed words on the page (headings, buttons), per language.
+# The CV itself is in cv.yml (English) and cv_it.yml (Italian).
+
+en:
+  experience: Experience
+  work: Selected work
+  education: Education
+  talks: Talks
+  publications: Publications
+  projects: Projects
+  places: Places
+  skills: Skills
+  languages: Languages
+  certifications: Certifications
+  sections: Sections
+  download: Download
+  download_pdf: Download PDF
+  print: Print
+  theme_title: Switch between light, dark and black
+  themes: { light: Light, dark: Dark, black: Black }
+  design: Design
+  design_title: Try the alternative designs
+  other_lang: Italiano
+  updated: Updated
+  date_format: "%-d %B %Y"
+  map_label: Map of Europe marking the places where I have lived and worked
+  world_label: World map marking places I have mapped
+  lived: lived and worked
+  mapped: mapped from afar
+  route: in this order
+
+it:
+  experience: Esperienza
+  work: Lavori scelti
+  education: Formazione
+  talks: Interventi
+  publications: Pubblicazioni
+  projects: Progetti
+  places: Luoghi
+  skills: Competenze
+  languages: Lingue
+  certifications: Certificazioni
+  sections: Sezioni
+  download: Scarica
+  download_pdf: Scarica PDF
+  print: Stampa
+  theme_title: Passa da chiaro a scuro a nero
+  themes: { light: Chiaro, dark: Scuro, black: Nero }
+  design: Design
+  design_title: Prova i design alternativi
+  other_lang: English
+  updated: Aggiornato il
+  date_format: "%d/%m/%Y"
+  map_label: Mappa dell'Europa con i luoghi in cui ho vissuto e lavorato
+  world_label: Planisfero con i luoghi che ho mappato
+  lived: vissuto e lavorato
+  mapped: mappato a distanza
+  route: in quest'ordine

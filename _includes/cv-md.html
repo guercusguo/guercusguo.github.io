@@ -1,0 +1,88 @@
+{%- comment -%}
+  The Markdown export, for one language. Rendered from the same data as the
+  page, so the two cannot drift.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: "en" -%}
+{%- assign ui = site.data.ui[lang] -%}
+{%- if lang == "it" %}{% assign cv = site.data.cv_it %}{% else %}{% assign cv = site.data.cv %}{% endif -%}
+{%- assign b = cv.basics -%}
+# {{ b.name }}
+{% if b.label %}
+**{{ b.label }}**
+{% endif %}
+{%- assign contact = "" | split: "" -%}
+{%- if b.location %}{% assign contact = contact | push: b.location %}{% endif -%}
+{%- if b.email %}{% assign contact = contact | push: b.email %}{% endif -%}
+{%- if b.phone %}{% assign contact = contact | push: b.phone %}{% endif -%}
+{%- if b.website %}{% assign contact = contact | push: b.website %}{% endif -%}
+{%- for l in b.links %}{% capture link %}[{{ l.label }}]({{ l.url }}){% endcapture %}{% assign contact = contact | push: link %}{% endfor %}
+{{ contact | join: " · " }}
+{% if b.summary %}
+{{ b.summary | strip }}
+{% endif %}
+{%- if cv.experience and cv.experience.size > 0 %}
+## {{ ui.experience }}
+{% for e in cv.experience %}
+### {{ e.role }}{% if e.org %} — {{ e.org }}{% endif %}
+
+_{{ e.start }}{% if e.end %} – {{ e.end }}{% endif %}{% if e.location %} · {{ e.location }}{% endif %}_
+{% if e.summary %}
+{{ e.summary | strip }}
+{% endif %}
+{% for h in e.highlights %}- {{ h | strip }}
+{% endfor %}
+{%- endfor %}
+{%- endif %}
+{%- if cv.work and cv.work.size > 0 %}
+## {{ ui.work }}
+{% for w in cv.work %}
+- **{% if w.url %}[{{ w.name }}]({{ w.url }}){% else %}{{ w.name }}{% endif %}**{% if w.description %} — {{ w.description | strip }}{% endif %}
+{%- endfor %}
+{% endif %}
+{%- if cv.education and cv.education.size > 0 %}
+## {{ ui.education }}
+{% for e in cv.education %}
+### {{ e.degree }}{% if e.institution %} — {{ e.institution }}{% endif %}
+
+_{{ e.start }}{% if e.end %} – {{ e.end }}{% endif %}{% if e.location %} · {{ e.location }}{% endif %}_
+{% if e.details %}
+{{ e.details | strip }}
+{% endif %}
+{%- endfor %}
+{%- endif %}
+{%- if cv.talks and cv.talks.size > 0 %}
+## {{ ui.talks }}
+{% for t in cv.talks %}
+- {{ t | strip }}
+{%- endfor %}
+{% endif %}
+{%- if cv.publications and cv.publications.size > 0 %}
+## {{ ui.publications }}
+{% for p in cv.publications %}
+- {{ p | strip }}
+{%- endfor %}
+{% endif %}
+{%- if cv.projects and cv.projects.size > 0 %}
+## {{ ui.projects }}
+{% for p in cv.projects %}
+- **{% if p.url %}[{{ p.name }}]({{ p.url }}){% else %}{{ p.name }}{% endif %}**{% if p.description %} — {{ p.description | strip }}{% endif %}
+{%- endfor %}
+{% endif %}
+{%- if cv.skills and cv.skills.size > 0 %}
+## {{ ui.skills }}
+{% for s in cv.skills %}
+- **{{ s.group }}:** {{ s.items | join: ", " }}
+{%- endfor %}
+{% endif %}
+{%- if cv.languages and cv.languages.size > 0 %}
+## {{ ui.languages }}
+{% for l in cv.languages %}
+- **{{ l.name }}:** {{ l.level }}
+{%- endfor %}
+{% endif %}
+{%- if cv.certifications and cv.certifications.size > 0 %}
+## {{ ui.certifications }}
+{% for c in cv.certifications %}
+- {{ c | strip }}
+{%- endfor %}
+{% endif %}

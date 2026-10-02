@@ -1,0 +1,183 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Your CV — the ONLY file you need to edit.
+#
+# Edit it anywhere: on github.com open this file, press the pencil, change,
+# "Commit changes". The site, the PDF and the Markdown export rebuild by
+# themselves in a minute or two.
+#
+# Rules of thumb
+#   - Leave a field out (or empty) and it simply disappears from the page.
+#   - Dates are free text: "2021", "Mar 2021", "2021-03" all work. Use
+#     end: "Present" for the current role.
+#   - Text fields accept **Markdown**: **bold**, _italic_, [links](https://…).
+#   - Order on the page = order in this file.
+# ─────────────────────────────────────────────────────────────────────────────
+
+basics:
+  name: Guido Antonio Di Carlo
+  label: Geographer & Geospatial Software Engineer
+  location: Turin, Italy
+  coordinates: "45.07° N · 7.69° E"   # only shown by the Atlas design
+  # photo: /assets/img/photo.jpg   # optional portrait, shown round in the header
+  # phone: "+00 000 000 000"      # public on the web — uncomment only if you want that
+  links:
+    - { label: LinkedIn, url: "https://www.linkedin.com/in/guido-antonio-di-carlo/" }
+  summary: >-
+    Geographer and geospatial software engineer. I came to maps through
+    biology and environmental questions, and I still read places as much through
+    people and territory as through data: alongside my work I am studying for a
+    second Master's degree, in Sociology. At the European Commission's Joint
+    Research Centre I build and run the platforms behind the Copernicus
+    Emergency Management Service, which delivers maps and geodata to civil
+    protection authorities before and after disasters. I have lived and worked
+    in Iceland, France, Switzerland, the UK and Italy.
+
+experience:
+  - role: Geospatial Full-Stack Developer & Cloud/GIS Platform Engineer
+    org: European Commission, Joint Research Centre (external consultant)
+    location: Turin, Italy
+    start: Jan 2023
+    end: Present
+    summary: >-
+      I design, build and operate the web applications, APIs and cloud
+      infrastructure of the [Copernicus Emergency Management Service](https://mapping.emergency.copernicus.eu/)
+      (CEMS) Risk and Recovery Mapping service.
+    highlights:
+      - "**Applications:** the operational platform for activations and the public portal."
+      - "**APIs:** the CEMS Geo Services API, built on open geospatial standards."
+      - "**Cloud:** the AWS environment and its CI/CD pipelines, including security and access control."
+      - "**Coordination:** technical focal point for the providers running the enterprise GIS platform."
+
+  - role: Geographic Information Systems Expert
+    org: European Commission, Joint Research Centre (external consultant)
+    location: Ispra, Italy
+    start: Aug 2022
+    end: Present
+    summary: >-
+      I manage CEMS Risk and Recovery Mapping activations and its aerial
+      component, which acquires imagery and LiDAR from aircraft and drones.
+    highlights:
+      - "**Activations:** from request to delivery, defining requirements with the civil protection authorities who request them."
+      - "**Quality control:** of maps, geodata, reports, aerial imagery and LiDAR against CEMS specifications."
+      - "**Tenders:** drafting framework contract documents and technical specifications, and evaluating provider proposals."
+
+  - role: GIS Analyst & Web Mapping Developer
+    org: "[ITHACA](https://ithaca.earth/)"
+    location: Turin, Italy
+    start: Jan 2019
+    end: Jun 2022
+    summary: >-
+      A research centre for geomatics and remote sensing in emergency
+      management, and a CEMS service provider.
+    highlights:
+      - "**Emergency mapping:** cartography and geodata for CEMS Rapid Mapping and Risk and Recovery Mapping, from optical and SAR imagery."
+      - "**Web platforms:** lead developer of ITHACA's web mapping platforms and internal tools."
+      - "**European Environment Agency study:** technical lead of an audit of EU27 national geodata, its accessibility and its INSPIRE and Open Data compliance."
+
+  - role: On-call GIS Specialist, Earth Observation
+    org: "[ITHACA](https://ithaca.earth/)"
+    location: Turin, Italy
+    start: Jun 2017
+    end: Dec 2018
+    summary: >-
+      On-call production for CEMS Rapid Mapping, the EU's 24/7 service: mapping
+      floods, fires and damage from satellite imagery within hours of a
+      disaster.
+
+# Things a visitor can click through to. `url` is optional.
+work:
+  - name: Copernicus EMS mapping portal
+    url: https://mapping.emergency.copernicus.eu/
+    description: The public site where every activation, map and dataset is published. I work on its data ingestion, templates and search.
+  - name: CEMS Geo Services API
+    description: A standards-based API that lets other systems query and download the service's geodata. I designed and built it.
+  - name: EU27 geodata audit
+    description: A study for the European Environment Agency of how accessible each member state's authoritative geodata really is. I led the technical work.
+
+education:
+  - degree: MSc in Sociology
+    institution: Università di Torino
+    location: Turin, Italy
+    start: "2025"
+    end: Present
+    details: >-
+      Contemporary societies and how they change, with theoretical and
+      methodological training, both qualitative and quantitative.
+  - degree: MSc in Geography and Territorial Sciences
+    institution: Università di Torino
+    location: Turin, Italy
+    start: "2016"
+    end: "2021"
+    details: >-
+      Physical geography and geoinformatics, 109/110. Thesis on making remote
+      sensing course materials more accessible on Moodle, with a Python NLP
+      pipeline for automatic keyword tagging.
+  - degree: BSc in Environmental Biology
+    institution: Università del Piemonte Orientale
+    location: Alessandria, Italy
+    start: "2004"
+    end: "2008"
+
+# Dots on the map. lon/lat in decimal degrees (the map covers Europe, 26°W–25°E,
+# 35°N–67.5°N). `note` shows in the list under the map. To move a label that
+# collides with another: anchor: end puts it left of the dot, dx/dy nudge it.
+places:
+  - { name: Reykjavík,   lon: -21.90, lat: 64.15, note: "HI Iceland, 2012–13 and 2015–16" }
+  - { name: Aberdeen,    lon: -2.10, lat: 57.15, note: "Erasmus, 2005–06" }
+  - { name: Lyon,        lon: 4.83,  lat: 45.76, note: "local development studies, 2014", anchor: end, dy: -3 }
+  - { name: Bellinzona,  lon: 9.02,  lat: 46.19, note: "2013–14", dy: -9 }
+  - { name: Ispra,       lon: 8.61,  lat: 45.81, note: "Joint Research Centre" }
+  - { name: Turin,       lon: 7.69,  lat: 45.07, note: "home, MSc, ITHACA", anchor: end, dy: 13 }
+  - { name: Alessandria, lon: 8.61,  lat: 44.91, note: "BSc", dy: 17 }
+  # kind: mapped = a place you worked on from afar (hollow marker)
+  - { name: Madagascar,  lon: 47.0,  lat: -19.5, kind: mapped, note: "land-cover change in protected areas, validated from imagery", anchor: end }
+
+# The order you moved through the places above; drawn as arrows on the map.
+route: [Alessandria, Aberdeen, Alessandria, Turin, Reykjavík, Bellinzona, Lyon, Turin, Reykjavík, Turin, Ispra]
+
+skills:
+  - group: Languages
+    items: [Python, SQL, JavaScript, HTML/CSS]
+  - group: Back-end
+    items: [Django, Django REST Framework, FastAPI, Wagtail, Celery, PostgreSQL/PostGIS, Redis, OAuth 2.0]
+  - group: Geospatial
+    items: [OGC API, GDAL, GeoPandas, QGIS, ArcGIS Enterprise / Pro, ArcGIS API for Python, ENVI, SNAP]
+  - group: Web mapping
+    items: [OpenLayers, MapLibre / Mapbox GL JS, Leaflet, ArcGIS JS API, deck.gl, Cesium]
+  - group: Cloud & DevOps
+    items: [AWS, EKS, S3, RDS, CloudFront, IAM, CloudFormation, Terraform, Docker, Kubernetes/Helm, GitLab CI/CD]
+  - group: AI
+    items: [AI-assisted development, LLM APIs, NLP (basic)]
+  - group: Design
+    items: [Affinity Designer, Inkscape, GIMP]
+
+languages:
+# Add score: 1–6 to an entry for a small level bar (off by default).
+  - { name: Italian,   level: Native }
+  - { name: English,   level: Proficient (C2) }
+  - { name: Icelandic, level: Basic (A1–A2) }
+
+# Optional sections — delete a section to hide it, or leave it empty.
+talks:
+  - "**EU Science for Preparedness** — keynote speaker and group moderator. Turin, 2025"
+  - "**CEMS Annual Conference** — keynote speaker. Ispra, 2023 and 2024"
+  - "**CEMS On-Demand Mapping workshops** (fire, flood, earthquake) — keynote speaker. Ispra, 2023"
+  - "**Emerging Technologies in DRR** — keynote speaker. Ispra, 2023"
+
+publications:
+  - "_The 2023 CEMS On-Demand Mapping Workshops_: [Fire](https://dx.doi.org/10.2760/565217), [Flood](https://dx.doi.org/10.2760/060686), [Earthquake](https://publications.jrc.ec.europa.eu/repository/handle/JRC137940). Publications Office of the European Union, 2023–2024."
+  - "[Remote Sensing Course in Geography Online Education: A MOODLE Learning Materials Adaptation and Optimization Workflow](https://doi.org/10.1007/978-3-031-17439-1_9). ASITA 2022, Genoa."
+
+projects:
+  - name: OsmTO
+    description: member of Turin's OpenStreetMap mappers group since 2022.
+  - name: Geography Night, University of Turin
+    description: ran a collaborative-mapping laboratory, 2017–2018.
+  - name: Film festivals and conferences
+    description: organiser of Couchfest (Turin, 2013), and of Green Days and Beneath The Waves for HI Iceland (Reykjavík, 2011–2012).
+
+certifications:
+  - "[LLMs Mastery: Transformers & Generative AI](https://www.udemy.com/certificate/UC-ddd4fddd-fa00-4c66-aca8-086466023edd/) — Udemy, 2025"
+  - "[AWS Solutions Architect Associate](https://www.udemy.com/certificate/UC-12d180cd-691b-4aa8-8914-51ae07b1b487/) (course) — Udemy, 2025"
+  - "[FastAPI – The Complete Course](https://www.udemy.com/certificate/UC-fe1ae9fa-fa20-4f57-8055-1b3a20970f48/) — Udemy, 2024"
+  - "[Web Application Technologies and Django](https://www.coursera.org/account/accomplishments/certificate/W42TM5XKCCNJ) — University of Michigan, 2021"
